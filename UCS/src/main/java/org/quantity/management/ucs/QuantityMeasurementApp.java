@@ -52,8 +52,8 @@ public class QuantityMeasurementApp {
             return (Double.compare(this.inches, inchesObject.getInches()) == 0);
         }
     }
-    public static void main(String[] args) {
 
+    public static void demonstrateFeetEquality() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter Feet1 value : ");
@@ -70,7 +70,11 @@ public class QuantityMeasurementApp {
         } else {
             System.out.println("Feet 1 and Feet 2 are not equal.");
         }
+        scanner.close();
+    }
 
+    public static void demonstrateInchesEquality() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Inches1 value : ");
         Double inches1 = scanner.nextDouble();
 
@@ -86,5 +90,10 @@ public class QuantityMeasurementApp {
             System.out.println("Inches 1 and Inches 2 are not equal");
         }
         scanner.close();
+    }
+
+    public static void main(String[] args) {
+        demonstrateFeetEquality();
+        demonstrateInchesEquality();
     }
 }
