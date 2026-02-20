@@ -2,6 +2,8 @@ package org.quantity.management.ucs.domain;
 
 import org.quantity.management.enums.LengthUnit;
 
+import static java.lang.Double.NaN;
+
 public class Length {
 
     private double value;
@@ -13,7 +15,10 @@ public class Length {
     }
 
     public double convertToBaseUnit() {
-        return this.value * this.unit.getConversionFactor();
+        if(this.unit != null) {
+            return this.value * this.unit.getConversionFactor();
+        }
+        return NaN;
     }
 
     public boolean compare(Length thatLength) {
