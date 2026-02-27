@@ -9,7 +9,6 @@ import static java.lang.Double.NaN;
 
 public class Length {
 
-
     private double value;
     private LengthUnit unit;
 
@@ -56,11 +55,8 @@ public class Length {
             if (targetUnit == null) {
                 throw new IllegalArgumentException();
             } else {
-                Double sourceLength = this.convertToBaseUnit();
-                Double sourceBaseLength = BigDecimal.valueOf(sourceLength / targetUnit.getConversionFactor())
-                        .setScale(2, RoundingMode.HALF_UP)
-                        .doubleValue();
-                Length result = new Length(sourceBaseLength, targetUnit);
+                Double targetLength = convertFromBaseToTargetUnit(this.convertToBaseUnit(), targetUnit);
+                Length result = new Length(targetLength, targetUnit);
                 return result;
             }
         } catch(NumberFormatException e) {
@@ -69,6 +65,17 @@ public class Length {
             System.out.println("Invalid LengthUnit");;
         }
         return null;
+    }
+
+    private double convertFromBaseToTargetUnit(double lengthInInches, LengthUnit targetUnit) {
+        Double targetLength = BigDecimal.valueOf(lengthInInches / targetUnit.getConversionFactor())
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+        return targetLength;
+    }
+
+    public Length add(Length thatLength) {
+        return  null;
     }
 
     @Override
