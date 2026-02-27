@@ -78,12 +78,16 @@ public class Length {
         return targetLength;
     }
 
-    public Length add(Length thatLength) {
-        Double length1Inches = this.convertToBaseUnit();
-        Double length2Inches = thatLength.convertToBaseUnit();
-        Double sum = Double.sum(length1Inches,length2Inches);
-        Double resultLength = convertFromBaseToTargetUnit(sum,this.getUnit());
-        return new Length(resultLength,this.getUnit());
+    public Length addAndConvert(Length thatLength, LengthUnit targetUnit) {
+        if (targetUnit == null) {
+            throw new IllegalArgumentException();
+        } else {
+            Double length1Inches = this.convertToBaseUnit();
+            Double length2Inches = thatLength.convertToBaseUnit();
+            Double sum = Double.sum(length1Inches, length2Inches);
+            Double resultLength = convertFromBaseToTargetUnit(sum, targetUnit);
+            return new Length(resultLength, targetUnit);
+        }
     }
 
     @Override

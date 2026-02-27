@@ -25,10 +25,10 @@ public class QuantityMeasurementApp {
                 + lengthObject2.toString());
     }
 
-    public static void demonstrateLengthAddition(Double length1, LengthUnit lengthUnit1, Double length2, LengthUnit lengthUnit2) throws Exception {
+    public static void demonstrateLengthAddition(Double length1, LengthUnit lengthUnit1, Double length2, LengthUnit lengthUnit2, LengthUnit targetUnit) throws Exception {
         Length lengthObject1 = new Length(length1, lengthUnit1);
         Length lengthObject2 = new Length(length2, lengthUnit2);
-        Length resultObject2 = lengthObject1.add(lengthObject2);
+        Length resultObject2 = lengthObject1.addAndConvert(lengthObject2, targetUnit);
         System.out.println("Length 1 with values : " + lengthObject1.toString() + " and Length 2 with values : "
                 + lengthObject2.toString() + " and result object "+resultObject2.toString());
     }
@@ -53,13 +53,13 @@ public class QuantityMeasurementApp {
         System.out.println();
         System.out.println("-------------------------Length Addition output--------------------------------");
         System.out.println();
-        demonstrateLengthAddition(1.0, LengthUnit.FEET, 2.0, LengthUnit.FEET);
-        demonstrateLengthAddition(1.0, LengthUnit.FEET, 12.0, LengthUnit.INCHES);
-        demonstrateLengthAddition(12.0, LengthUnit.INCHES, 1.0, LengthUnit.FEET);
-        demonstrateLengthAddition(1.0, LengthUnit.YARDS, 3.0, LengthUnit.FEET);
-        demonstrateLengthAddition(36.0, LengthUnit.INCHES, 1.0, LengthUnit.YARDS);
-        demonstrateLengthAddition(2.54, LengthUnit.CENTIMETERS, 1.0, LengthUnit.INCHES);
-        demonstrateLengthAddition(5.0, LengthUnit.FEET, 0.0, LengthUnit.INCHES);
-        demonstrateLengthAddition(5.0, LengthUnit.FEET, -2.0, LengthUnit.FEET);
+        demonstrateLengthAddition(1.0, LengthUnit.FEET, 12.0, LengthUnit.INCHES, LengthUnit.FEET);
+        demonstrateLengthAddition(1.0, LengthUnit.FEET, 12.0, LengthUnit.INCHES, LengthUnit.INCHES);
+        demonstrateLengthAddition(12.0, LengthUnit.INCHES, 1.0, LengthUnit.FEET, LengthUnit.YARDS);
+        demonstrateLengthAddition(1.0, LengthUnit.YARDS, 3.0, LengthUnit.FEET, LengthUnit.YARDS);
+        demonstrateLengthAddition(36.0, LengthUnit.INCHES, 1.0, LengthUnit.YARDS, LengthUnit.FEET);
+        demonstrateLengthAddition(2.54, LengthUnit.CENTIMETERS, 1.0, LengthUnit.INCHES, LengthUnit.CENTIMETERS);
+        demonstrateLengthAddition(5.0, LengthUnit.FEET, 0.0, LengthUnit.INCHES, LengthUnit.YARDS);
+        demonstrateLengthAddition(5.0, LengthUnit.FEET, -2.0, LengthUnit.FEET, LengthUnit.INCHES);
     }
 }
