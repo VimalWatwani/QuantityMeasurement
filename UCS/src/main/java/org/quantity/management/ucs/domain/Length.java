@@ -30,10 +30,10 @@ public class Length {
 
     public boolean compare(Length thatLength) {
         Double value1 = BigDecimal.valueOf(this.convertToBaseUnit())
-                .setScale(2, RoundingMode.HALF_UP)
+                .setScale(3, RoundingMode.HALF_UP)
                 .doubleValue();
         Double value2 = BigDecimal.valueOf(thatLength.convertToBaseUnit())
-                .setScale(2, RoundingMode.HALF_UP)
+                .setScale(3, RoundingMode.HALF_UP)
                 .doubleValue();
         return Double.compare(value1,value2) == 0;
     }
@@ -67,15 +67,23 @@ public class Length {
         return null;
     }
 
+    public LengthUnit getUnit() {
+        return unit;
+    }
+
     private double convertFromBaseToTargetUnit(double lengthInInches, LengthUnit targetUnit) {
         Double targetLength = BigDecimal.valueOf(lengthInInches / targetUnit.getConversionFactor())
-                .setScale(2, RoundingMode.HALF_UP)
+                .setScale(3, RoundingMode.HALF_UP)
                 .doubleValue();
         return targetLength;
     }
 
     public Length add(Length thatLength) {
-        return  null;
+        Double length1Inches = this.convertToBaseUnit();
+        Double length2Inches = thatLength.convertToBaseUnit();
+        Double sum = Double.sum(length1Inches,length2Inches);
+        Double resultLength = convertFromBaseToTargetUnit(sum,this.getUnit());
+        return new Length(resultLength,this.getUnit());
     }
 
     @Override
