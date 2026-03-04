@@ -1,20 +1,19 @@
-package org.quantity.management.enums;
+package org.weight.management.enums;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static java.lang.Double.NaN;
+public enum WeightUnit {
 
-public enum LengthUnit {
-
-    FEET(12.0),
-    INCHES(1.0),
-    YARDS(36),
-    CENTIMETERS(0.393701);
+    KILOGRAM(1000.0),
+    MILLIGRAM(0.001),
+    GRAM(1.0),
+    POUND(453.592),
+    TONNE(1_000_000.0);
 
     private final double conversionFactor;
 
-    LengthUnit(double conversionFactor) {
+    WeightUnit(double conversionFactor) {
         this.conversionFactor = conversionFactor;
     }
 
@@ -24,15 +23,15 @@ public enum LengthUnit {
 
     public double convertToBaseUnit(double value) {
         if (Double.isNaN(value) || Double.isInfinite(value)) {
-            throw new NumberFormatException("The Length value is Invalid");
+            throw new NumberFormatException("The Weight value is Invalid");
         } else {
                 return value * this.conversionFactor;
         }
     }
     public double convertFromBaseToTargetUnit(double baseValue) {
-        Double targetLength = BigDecimal.valueOf(baseValue / this.conversionFactor)
+        Double targetWeight = BigDecimal.valueOf((baseValue / this.conversionFactor) * 100.0 / 100.0)
                 .setScale(3, RoundingMode.HALF_UP)
                 .doubleValue();
-        return targetLength;
+        return targetWeight;
     }
 }
